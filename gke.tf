@@ -28,12 +28,6 @@ variable "purpose" {
   description = "purpose"
 }
 
-terraform {
-    backend "gcs" {
-        bucket = "${var.owner}-terraform-state"
-        prefix = "terraform/state"
-    }
-}
 
 # GKE cluster
 resource "google_container_cluster" "primary" {
