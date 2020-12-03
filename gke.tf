@@ -1,6 +1,6 @@
 variable "gke_username" {
   default     = ""
-  description = "gke username"
+  description = ""
 }
 
 variable "gke_password" {
@@ -13,25 +13,9 @@ variable "gke_num_nodes" {
   description = "number of gke nodes"
 }
 
-variable "owner" {
-  default     = ""
-  description = "owner"
-}
-
-variable "deleteAfter" {
-  default     = ""
-  description = "TTL"
-}
-
-variable "purpose" {
-  default     = ""
-  description = "purpose"
-}
-
-
 # GKE cluster
 resource "google_container_cluster" "primary" {
-  name     = "${var.owner}-${var.project_id}-gke"
+  name     = "${var.owner}-${var.purpose}"
   location = var.region
 
   remove_default_node_pool = true
@@ -64,15 +48,15 @@ resource "google_container_node_pool" "primary_nodes" {
     ]
 
     labels = {
-      env = var.project_id
-      owner = "${var.owner}"
-      purpose = "${var.purpose}"
-      deleteAfter = "${var.deleteAfter}"
+          env = var.project_id
+          owner = var.owner
+          purpose = var.purpose
+          deleteAfter = var.deleteAfter
     }
 
     preemptible  = true
     machine_type = "n1-standard-1"
-    tags         = ["gke-node", "${var.owner}-gke"]
+    tags         = ["gke-node", "${var.project_id}-${var.owner}-gke"]
     metadata = {
       disable-legacy-endpoints = "true"
     }
