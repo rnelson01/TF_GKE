@@ -1,0 +1,5 @@
+project_id = "sales-209522"
+region     = "us-central1"
+owner      = "rnelson"
+purpose    = "testing"
+deleteAfter = "07092020"
