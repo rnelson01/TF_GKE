@@ -1,4 +1,6 @@
 project_id = "sales-209522"
+gke_username = "un"
+gke_password = "pw"
 region     = "us-central1"
 owner      = "ole_boy"
 purpose    = "testing"
